@@ -3,7 +3,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <cmath>
-#include <map>
+#include <unordered_map>
 
 using namespace std;
 
@@ -21,7 +21,7 @@ int main()
 
     string instruction;                     // hold the entire binary instruction
     string opcode;                          // hold the binary opcode (4 bits)
-    map<string, int> reg_map;               // a map from strings to keys to rep registers
+    unordered_map<string, int> reg_map;               // a map from strings to keys to rep registers
     reg_map["000"] = 0;                     //r1                
     reg_map["001"] = 0;                     //r2
     reg_map["010"] = 0;                     //r3
