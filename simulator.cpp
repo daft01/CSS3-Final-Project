@@ -11,7 +11,7 @@ int bin_to_dec(string bin);
 
 int main()
 {   
-    ifstream fin("sum.o");                  // the file with binary code (0s and 1s)
+    ifstream fin("out.o");                  // the file with binary code (0s and 1s)
 
     if(fin.fail())                          // make sure file opened okay
     {
@@ -22,15 +22,22 @@ int main()
     string instruction;                     // hold the entire binary instruction
     string opcode;                          // hold the binary opcode (4 bits)
     unordered_map<string, int> reg_map;               // a map from strings to keys to rep registers
-    reg_map["000"] = 0;                     //r1                
-    reg_map["001"] = 0;                     //r2
-    reg_map["010"] = 0;                     //r3
-    reg_map["011"] = 0;                     //r4
-    reg_map["100"] = 0;                     //r5
-    reg_map["101"] = 0;                     //r6
-    reg_map["110"] = 0;                     //r7
-    reg_map["111"] = 0;                     //r8
-
+    reg_map["0000"] = 0;                     //r1                
+    reg_map["0001"] = 0;                     //r2
+    reg_map["0010"] = 0;                     //r3
+    reg_map["0011"] = 0;
+    reg_map["0100"] = 0;                     //r4
+    reg_map["0101"] = 0;                     //r5
+    reg_map["0110"] = 0;                     //r6
+    reg_map["0111"] = 0;                       //r7
+    reg_map["1000"] = 0;
+    reg_map["1001"] = 0;                    //r8
+    reg_map["1010"] = 0;                     //r1                
+    reg_map["1011"] = 0;                   //r4                    //r5
+    reg_map["1100"] = 0;                     //r6
+    reg_map["1101"] = 0;                     //r7
+    reg_map["1110"] = 0;
+    reg_map["1111"] = 0;
     while(!fin.eof())
     { 
         fin >> instruction;                         // read in the entire line of instrcution (13 bits)
@@ -45,7 +52,9 @@ int main()
             int val = bin_to_dec(n);                // convert binary to decimal
 
             string regis = instruction.substr(12,4);    // find the 3 bits related to the register
-            reg_map[regis] = val;                       // use those 3 bits as location to store value
+            reg_map[regis] = val;
+            cout << "val " << val << " " << "regis " << regis << endl;
+            // use those 3 bits as location to store value
         }
         else if(opcode == "0100") //SUM                 // SUM instruction is followed by three registers
         {   
