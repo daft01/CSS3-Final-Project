@@ -24,7 +24,6 @@ int main(){
         
         fin >> opcode;
         
-        
         if(opcode == "LOL"){
             out << "0001";
             fin >> num;
@@ -41,7 +40,7 @@ int main(){
             fin >> regis;
             
             out << regToBin(regis);
-            out << "000000";
+            out << "00000000";
             
             out << endl;
         }
@@ -59,13 +58,23 @@ int main(){
             
                 out << endl;
         }
-        else if(opcode == "OML"){
+        else if(opcode == "OMG"){
                 cout << "0101";
                 for(int i=0; i<3; i++){
                     fin >> regis;
                     out << regToBin(regis);
                 }
                 out << endl;
+        }
+        else if(opcode == "TMI"){
+        }
+        else if(opcode == "ILY"){
+        }
+        else if(opcode == "BRB"){
+        }
+        else if(opcode == "LOML"){
+        }
+        else if(opcode == "TY"){
         }
         else{
             cout << "ERROR: INSTRUCTION DOESN'T EXIST\n";
@@ -84,7 +93,7 @@ string decToBin(int dec)
     string bin = "";
     
     if(dec == 0)
-        return "0000000";
+        return "00000000";
     
     while(dec / 2 != 0)
     {
@@ -94,33 +103,32 @@ string decToBin(int dec)
     
     bin = "1" + bin;
     
-    while(bin.size() < 6)   // have to make sure that
-        bin = "0" + bin;    // each number uses 6 bits
+    while(bin.size() < 8)
+        bin = "0" + bin;
     
     return bin;
 }
 
 string regToBin(string reg)
 {
-    if(reg == "R1")         // basically a simple if.. else
-        return "000";       // that will read in a register and
-    else if(reg == "R2")    // return the appropriate address.
-        return "001";
-    else if(reg == "R3")
-        return "010";
-    else if(reg == "R4")
-        return "011";
-    else if(reg == "R5")
-        return "100";
-    else if(reg == "R6")
-        return "101";
-    else if(reg == "R7")
-        return "110";
-    else if(reg == "R8")
-        return "111";
-    else
+    int num = 0;
+    string bin = "";
+    
+    for(int i=2; i<reg.size(); i++){
+        num *= 10;
+        num += reg[i];
+    }
+    
+    while(num / 2 != 0)
     {
-        cout << "Error\n";
-        exit(2);           // kill the program if invalid register
-    }                      // is addressed.
+        bin = to_string(num % 2) + bin;
+        num /= 2;
+    }
+    
+    bin = "1" + bin;
+    
+    while(bin.size() < 4)
+        bin = "0" + bin;
+    
+    return bin;
 }
