@@ -59,13 +59,14 @@ int main(){
                 out << endl;
         }
         else if(opcode == "OMG"){
-                cout << "0101";
+                out << "0101";
                 for(int i=0; i<3; i++){
                     fin >> regis;
                     out << regToBin(regis);
                 }
                 out << endl;
         }
+        /*
         else if(opcode == "TMI"){
         }
         else if(opcode == "ILY"){
@@ -80,6 +81,7 @@ int main(){
             cout << "ERROR: INSTRUCTION DOESN'T EXIST\n";
             exit(0);
         }
+         */
     }
     
     fin.close();
@@ -114,9 +116,9 @@ string regToBin(string reg)
     int num = 0;
     string bin = "";
     
-    for(int i=2; i<reg.size(); i++){
+    for(int i=4; i<reg.size(); i++){
         num *= 10;
-        num += reg[i];
+        num += reg[i] - '0';
     }
     
     while(num / 2 != 0)

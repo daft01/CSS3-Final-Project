@@ -38,8 +38,12 @@ int main()
     reg_map["1101"] = 0;                     //r7
     reg_map["1110"] = 0;
     reg_map["1111"] = 0;
+
+
     while(!fin.eof())
     { 
+		cout << "lol" << endl;
+
         fin >> instruction;                         // read in the entire line of instrcution (13 bits)
         opcode = instruction.substr(0,4);// take the first 4 bits of the instruction
         //int numCode;
@@ -53,7 +57,6 @@ int main()
 
             string regis = instruction.substr(12,4);    // find the 3 bits related to the register
             reg_map[regis] = val;
-            cout << "val " << val << " " << "regis " << regis << endl;
             // use those 3 bits as location to store value
         }
         else if(opcode == "0100") //SUM                 // SUM instruction is followed by three registers
@@ -121,6 +124,7 @@ int main()
 int bin_to_dec(string bin) 
 {
     int num = 0;
+    
     for (int i = 0; i < bin.length(); i++) 
         if (bin[i] == '1')
             num += pow(2, bin.length() - 1 - i);
