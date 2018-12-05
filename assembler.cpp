@@ -42,7 +42,7 @@ int main(){
             out << regToBin(regis);
             out << "00000000";
             
-            out << endl;
+            out << endl;//only for testing purpose
         }
         else if(opcode == "BFF"){
                 break;
@@ -66,15 +66,34 @@ int main(){
                 }
                 out << endl;
         }
-        /*
+        
         else if(opcode == "TMI"){
+            out << "0110";
+            for(int i=0; i<3; i++){
+                fin >> regis;
+                out << regToBin(regis);
+            }
+            out << endl;
+
         }
         else if(opcode == "ILY"){
+            out << "0111";
+            for(int i=0; i<3; i++){
+                fin >> regis;
+                out << regToBin(regis);
+            }
+            out << endl;   
         }
         else if(opcode == "BRB"){
+            out << "1000";
+            for(int i=0; i<3; i++){
+                fin >> regis;
+                out << regToBin(regis);
+            }
+            out << endl;   
         }
-        else if(opcode == "LOML"){
-        }
+        /*
+
         else if(opcode == "TY"){
         }
         else{

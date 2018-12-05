@@ -42,9 +42,7 @@ int main()
 
     while(!fin.eof())
     { 
-		cout << "lol" << endl;
-
-        fin >> instruction;                         // read in the entire line of instrcution (13 bits)
+		fin >> instruction;                         // read in the entire line of instrcution (13 bits)
         opcode = instruction.substr(0,4);// take the first 4 bits of the instruction
         //int numCode;
         
@@ -114,6 +112,9 @@ int main()
             int mod_result = reg_map[regisA] % reg_map[regisB]; // add the first two registers
             reg_map[regisC] = mod_result;
         }
+        /*else if(opcode == "1001"){
+
+        }*/
     }
 
     fin.close();
