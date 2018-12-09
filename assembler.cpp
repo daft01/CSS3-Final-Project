@@ -25,7 +25,7 @@ int main(){
         
         fin >> opcode;
         
-        if(opcode == "LOL"){
+        if(opcode == "LOL"){ // In
             out << "0001";
             fin >> num;
             
@@ -36,7 +36,7 @@ int main(){
             
             out << endl;
         }
-        else if(opcode == "JK"){
+        else if(opcode == "JK"){ // Out
             out << "0010";
             fin >> regis;
             
@@ -45,70 +45,73 @@ int main(){
             
             out << endl;//only for testing purpose
         }
-        else if(opcode == "BFF"){
+        else if(opcode == "BFF"){ // Halt
 			out << "0011000000000000" << endl;
         }
-        else if(opcode == "LMAO")
+        else if(opcode == "LMAO") // Sum
         {
-                out << "0100";
-            
-                for(int i=0; i<3; i++){
-                    fin >> regis;
-                    out << regToBin(regis);
-                }
-            
-                out << endl;
+			out << "0100";
+		
+			for(int i=0; i<3; i++){
+				fin >> regis;
+				out << regToBin(regis);
+			}
+		
+			out << endl;
         }
-        else if(opcode == "OMG"){
-                out << "0101";
-                for(int i=0; i<3; i++){
-                    fin >> regis;
-                    out << regToBin(regis);
-                }
-                out << endl;
+        else if(opcode == "OMG"){ // Sub
+			out << "0101";
+
+			for(int i=0; i<3; i++){
+				fin >> regis;
+				out << regToBin(regis);
+			}
+
+			out << endl;
         }
         else if(opcode == "TMI"){
-            out << "0110";
-            for(int i=0; i<3; i++){
-                fin >> regis;
-                out << regToBin(regis);
-            }
-            out << endl;
+			out << "0110";
+			fin >> regis;
+			
+			out << lineToBin(regis) << out;
         }
         else if(opcode == "ILY"){
-            out << "0111";
-            for(int i=0; i<3; i++){
-                fin >> regis;
-                out << regToBin(regis);
-            }
-            out << endl;   
+			out << "0111";
+
+			fin >> regis;
+			out << regToBin(regis);
+
+			fin >> regis;
+			if(regis == "TFTI")
+				out << "0001";
+			else if(regis == "ATM")
+				out << "0010";
+			else(regis == "MYOB")
+				out << "0011";
+
+			fin >> regis;
+			out << regToBin(regis) << endl;
         }
         else if(opcode == "BRB"){
-            out << "1000";
-            for(int i=0; i<3; i++){
-                fin >> regis;
-                out << regToBin(regis);
-            }
-            out << endl;   
+			out << "1000";
+
+			fin >> regis;
+			out << regToBin(regis);
+
+			fin >> regis;
+				
+			
         }
 		else if(opcode == "LOML"){
-			out << "1001";
 
-			fin >> regis;
-			out << lineToBin(regis);
-			out << endl;
 		}
         else if(opcode == "TY"){
-			out << "1010";
-			fin >> regis;
-
-			if(regis ==
+		
         }
         else{
             cout << "ERROR: INSTRUCTION DOESN'T EXIST\n";
             exit(0);
         }
-         */
     }
     
     fin.close();
@@ -143,7 +146,7 @@ string regToBin(string reg)
     int num = 0;
     string bin = "";
     
-    for(int i=4; i<reg.size(); i++){
+    for(int i=2; i<reg.size(); i++){
         num *= 10;
         num += reg[i] - '0';
     }
@@ -175,4 +178,15 @@ string lineToBin(string line){
 		bin = "0" + bin;
 		
 	return bin;
+}
+
+int regToInt(string str){
+	int num = 0;
+	
+	for(int i=0; i < str[i]; i++){
+		num *= 10;
+		num += str[i] - '0';
+	}
+
+	reutrn num;
 }
