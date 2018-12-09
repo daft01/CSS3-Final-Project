@@ -12,6 +12,7 @@ int bin_to_dec(string bin);
 int main()
 {   
     ifstream fin("out.o");                  // the file with binary code (0s and 1s)
+	int lineNumber = 0;
 
     if(fin.fail())                          // make sure file opened okay
     {
@@ -112,9 +113,26 @@ int main()
             int mod_result = reg_map[regisA] % reg_map[regisB]; // add the first two registers
             reg_map[regisC] = mod_result;
         }
-        /*else if(opcode == "1001"){
+        else if(opcode == "1001"){
+			int jump = bin_to_dec(instruction.substr(4,12));
 
-        }*/
+			if(jump < lineNumber){
+				fin.close();
+    			fin = ifstream("out.o");                  // the file with binary code (0s and 1s)
+				
+				int count = 0;
+
+				while(count != jump){
+					fin >> instruction;
+					
+					++count;
+				}
+
+			}
+
+        }
+
+		++lineNumber;
     }
 
     fin.close();

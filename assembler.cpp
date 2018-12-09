@@ -5,6 +5,7 @@ using namespace std;
 
 string decToBin(int dec);
 string regToBin(string reg);
+string lineToBin(string line);
 
 int main(){
     ifstream fin("cool.file");
@@ -45,7 +46,7 @@ int main(){
             out << endl;//only for testing purpose
         }
         else if(opcode == "BFF"){
-                break;
+			out << "0011000000000000" << endl;
         }
         else if(opcode == "LMAO")
         {
@@ -66,7 +67,6 @@ int main(){
                 }
                 out << endl;
         }
-        
         else if(opcode == "TMI"){
             out << "0110";
             for(int i=0; i<3; i++){
@@ -74,7 +74,6 @@ int main(){
                 out << regToBin(regis);
             }
             out << endl;
-
         }
         else if(opcode == "ILY"){
             out << "0111";
@@ -92,9 +91,18 @@ int main(){
             }
             out << endl;   
         }
-        /*
+		else if(opcode == "LOML"){
+			out << "1001";
 
+			fin >> regis;
+			out << lineToBin(regis);
+			out << endl;
+		}
         else if(opcode == "TY"){
+			out << "1010";
+			fin >> regis;
+
+			if(regis ==
         }
         else{
             cout << "ERROR: INSTRUCTION DOESN'T EXIST\n";
@@ -152,4 +160,19 @@ string regToBin(string reg)
         bin = "0" + bin;
     
     return bin;
+}
+
+string lineToBin(string line){
+	int temp = stoi(line);
+	string bin = "";
+
+	while(temp){
+		bin = to_string(temp%2) + bin;
+		temp /= 2;
+	}
+
+	while(bin.length() != 12)
+		bin = "0" + bin;
+		
+	return bin;
 }
