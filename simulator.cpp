@@ -8,6 +8,7 @@
 using namespace std;
 
 int bin_to_dec(string bin);
+void clear();
 
 int main()
 {   
@@ -22,23 +23,7 @@ int main()
 
     string instruction;                     // hold the entire binary instruction
     string opcode;                          // hold the binary opcode (4 bits)
-    unordered_map<string, int> reg_map;               // a map from strings to keys to rep registers
-    reg_map["0000"] = 0;                     //r1                
-    reg_map["0001"] = 0;                     //r2
-    reg_map["0010"] = 0;                     //r3
-    reg_map["0011"] = 0;
-    reg_map["0100"] = 0;                     //r4
-    reg_map["0101"] = 0;                     //r5
-    reg_map["0110"] = 0;                     //r6
-    reg_map["0111"] = 0;                       //r7
-    reg_map["1000"] = 0;
-    reg_map["1001"] = 0;                    //r8
-    reg_map["1010"] = 0;                     //r1                
-    reg_map["1011"] = 0;                   //r4                    //r5
-    reg_map["1100"] = 0;                     //r6
-    reg_map["1101"] = 0;                     //r7
-    reg_map["1110"] = 0;
-    reg_map["1111"] = 0;
+
 
 
     while(!fin.eof())
@@ -149,4 +134,23 @@ int bin_to_dec(string bin)
             num += pow(2, bin.length() - 1 - i);
     
     return num;
+}
+void clear(){
+    unordered_map<string, int> reg_map;               // a map from strings to keys to rep registers
+    reg_map["0000"] = 0;                     //r1                
+    reg_map["0001"] = 0;                     //r2
+    reg_map["0010"] = 0;                     //r3
+    reg_map["0011"] = 0;
+    reg_map["0100"] = 0;                     //r4
+    reg_map["0101"] = 0;                     //r5
+    reg_map["0110"] = 0;                     //r6
+    reg_map["0111"] = 0;                       //r7
+    reg_map["1000"] = 0;
+    reg_map["1001"] = 0;                    //r8
+    reg_map["1010"] = 0;                     //r1                
+    reg_map["1011"] = 0;                   //r4                    //r5
+    reg_map["1100"] = 0;                     //r6
+    reg_map["1101"] = 0;                     //r7
+    reg_map["1110"] = 0;
+    reg_map["1111"] = 0;
 }
