@@ -18,7 +18,8 @@ int main()
     ifstream fin("out.o");                  // the file with binary code (0s and 1s)
     int lineNumber = 0;
     unordered_map<string, int> reg_map;
-    int arrStart = INT_MAX;
+    int arrStart;
+	int arrSize = 0;
     
     if(fin.fail())                          // make sure file opened okay
     {
@@ -128,8 +129,9 @@ int main()
             }
         }
         else if(opcode == "1000"){//Array
-            if(arrStart == INT_MAX){
-                arrStart = bin_to_dec(instruction.substr(12,4))-1;
+            if(arrSize == 0){
+                arrStart = bin_to_dec(instruction.substr(12,4));
+				arrSize = bin_to_dec(instruction.substr(4,8));
             }
             else{
                 int regisA = reg_map[instruction.substr(4,4)];
@@ -145,9 +147,7 @@ int main()
                 else if(regisB == "1011"){
                     reg_map[magic(regisA + arrStart)] = reg_map[regisC];
                 }
-
             }
-
         }
         else if(opcode == "1010"){//Register
             string regisA = instruction.substr(4,4);
@@ -164,6 +164,19 @@ int main()
                 reg_map[regisA] -= reg_map[regisC];
             }
         }
+        else if(opcode == "1100"){
+            string action = instruction.substr(8,4);
+            string reg = instruction.substr(12,4);
+
+            if(action == "0100"){
+                int sum = 0, count = arrStart;
+                
+                for(int i=arrStart; i < arrStart+arrSize; i++)
+                    sum += reg_map[magic(i)];
+                
+                reg_map[reg] = sum;
+            }
+		}
         
         ++lineNumber;
     }

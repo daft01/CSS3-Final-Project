@@ -9,7 +9,7 @@ string regToBin(string reg);
 string lineToBin(string line);
 
 int main(){
-    ifstream fin("cool.file");
+    ifstream fin("benchmark2.file");
     ofstream out("out.o");
     
     if(fin.fail())
@@ -148,6 +148,21 @@ int main(){
             
             fin >> regis;
             out << regToBin(regis);
+        }
+        else if(opcode == "WYD"){
+            out << "1100";
+            
+            fin >> regis;
+            out << "1000";
+            
+            fin >> regis;
+            if(regis == "LMAO")
+                out << "0100";
+            else
+                out << "1101";
+            
+            fin >> regis;
+            out << regToBin(regis) << endl;
         }
         else{
             cout << "ERROR: INSTRUCTION DOESN'T EXIST\n";
