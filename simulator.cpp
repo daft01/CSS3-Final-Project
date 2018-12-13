@@ -12,6 +12,7 @@ void clear(unordered_map<string, int> &reg_map);
 
 int main()
 {   
+    int arrStart = 0;
     ifstream fin("out.o");                  // the file with binary code (0s and 1s)
 	int lineNumber = 0;
     unordered_map<string, int> reg_map;
@@ -114,13 +115,25 @@ int main()
                 }    
             }
         }
-        else if(opcode == "1010"){//Register
-            string regis = instruction.substr(4,4);
-            return reg_map[regis];
-        }
-        else{
+        else if(opcode == "1000"){//Array
+            arrStart = instruction.substr(12,4);
 
         }
+        else if(opcode == "1010"){//Register
+            string op = instruction.substr(8,4);
+            string regisA = insruction.substr(4,4);
+            string regisB = instruction.substr(12,4);
+            if(op == "1011"){
+                
+            }
+            else if(op == "0100"){
+
+            }
+            else{
+
+            }
+        }
+    
 		++lineNumber;
     }
 
