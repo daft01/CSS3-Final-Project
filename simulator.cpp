@@ -11,6 +11,7 @@ using namespace std;
 int bin_to_dec(string bin);
 void clear(unordered_map<string, int> &reg_map);
 string regToBin(string reg);
+string magic(int num);
 
 int main()
 {
@@ -128,7 +129,7 @@ int main()
         }
         else if(opcode == "1000"){//Array
             if(arrStart == INT_MAX){
-                arrStart = bin_to_dec(instruction.substr(12,4));
+                arrStart = bin_to_dec(instruction.substr(12,4))-1;
             }
             else{
                 int regisA = reg_map[instruction.substr(4,4)];
@@ -136,15 +137,17 @@ int main()
                 string regisC = instruction.substr(12,4);
                 
                 if(regisB == "0100"){
-                    reg_map[regToBin(to_string(regisA+arrStart))] += reg_map[regisC];
+                    reg_map[magic(regisA + arrStart)] += reg_map[regisC];
                 }
                 else if(regisB == "0101"){
-                    reg_map[regToBin(to_string(regisA+arrStart))] -= reg_map[regisC];
+                    reg_map[magic(regisA + arrStart)] -= reg_map[regisC];
                 }
                 else if(regisB == "1011"){
-                    reg_map[regToBin(to_string(regisA+arrStart))] = reg_map[regisC];
+                    reg_map[magic(regisA + arrStart)] = reg_map[regisC];
                 }
+
             }
+
         }
         else if(opcode == "1010"){//Register
             string regisA = instruction.substr(4,4);
@@ -166,8 +169,28 @@ int main()
     }
     
     fin.close();
-    
+
     return 0;
+}
+
+string magic(int num){
+    string bin = "";
+    
+    if(num == 0)
+        return "0000";
+    
+    while(num / 2 != 0)
+    {
+        bin = to_string(num % 2) + bin;
+        num /= 2;
+    }
+    
+    bin = "1" + bin;
+    
+    while(bin.size() < 4)
+        bin = "0" + bin;
+    
+    return bin;
 }
 
 int bin_to_dec(string bin)
@@ -190,7 +213,7 @@ string regToBin(string reg)
         num *= 10;
         num += reg[i] - '0';
     }
-    
+
     while(num / 2 != 0)
     {
         bin = to_string(num % 2) + bin;

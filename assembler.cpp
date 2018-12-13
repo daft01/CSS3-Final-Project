@@ -129,7 +129,7 @@ int main(){
 		else if(opcode == "LOML"){
             out << "1001000000000000" << endl;
 		}
-        else if(opcode[0] == 'T' && opcode[0] == 'Y'){
+        else if(opcode[0] == 'T' && opcode[1] == 'Y'){
             out << "1010";
             
             fin >> regis;
