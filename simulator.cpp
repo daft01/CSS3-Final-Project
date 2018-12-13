@@ -175,6 +175,20 @@ int main()
                     sum += reg_map[magic(i)];
                 
                 reg_map[reg] = sum;
+            }else{
+                int find = reg_map[reg];
+                int i = arrStart;
+                
+                while(i < arrStart+arrSize){
+                    if(reg_map[magic(i)] == find){
+                        reg_map[reg] = i-arrStart;
+                        break;
+                    }
+                    i++;
+                }
+                
+                if(i == arrStart+arrSize)
+                    reg_map[reg] = -1;
             }
 		}
         
