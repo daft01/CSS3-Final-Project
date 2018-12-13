@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cctype>
 #include <fstream>
 #include <cstdlib>
 using namespace std;
@@ -73,7 +74,7 @@ int main(){
 			out << "0110";
 			fin >> regis;
 			
-			out << lineToBin(regis) << out;
+			out << lineToBin(regis) << endl;
         }
         else if(opcode == "ILY"){
 			out << "0111";
@@ -86,7 +87,7 @@ int main(){
 				out << "0001";
 			else if(regis == "ATM")
 				out << "0010";
-			else(regis == "MYOB")
+			else if(regis == "MYOB")
 				out << "0011";
 
 			fin >> regis;
@@ -96,17 +97,54 @@ int main(){
 			out << "1000";
 
 			fin >> regis;
-			out << regToBin(regis);
-
-			fin >> regis;
-				
-			
+            
+            if(isdigit(regis[0])){
+                if(regis[0] == 1)
+                    out << decToBin(regis[0] - '0');
+                else
+                    out << decToBin((regis[0] - '0' * 10) + regis[1] - '0');
+                
+                fin >> regis;
+                out << regToBin(regis);
+            }else{
+                fin >> regis;
+                out << regToBin(regis);
+                
+                fin >> regis;
+                
+                if(regis == "IDK")
+                    cout << "1011";
+                else if(regis == "LMAO")
+                    cout << "0100";
+                else if(regis == "SUB")
+                    cout << "0101";
+                
+                fin >> regis;
+                out << regToBin(regis);
+            }
         }
 		else if(opcode == "LOML"){
-
+            out << "1001000000000000" << endl;
 		}
-        else if(opcode == "TY"){
-		
+        else if(opcode[0] == 'T' && opcode[0] == 'Y'){
+            out << "1010";
+            
+            fin >> regis;
+            
+            fin >> regis;
+            out << regToBin(regis);
+            
+            fin >> regis;
+            
+            if(regis == "IDK")
+                out << "1011";
+            else if(regis == "LMAO")
+                out << "0100";
+            else
+                out << "0101";
+            
+            fin >> regis;
+            out << regToBin(regis);
         }
         else{
             cout << "ERROR: INSTRUCTION DOESN'T EXIST\n";
@@ -188,5 +226,5 @@ int regToInt(string str){
 		num += str[i] - '0';
 	}
 
-	reutrn num;
+	return num;
 }

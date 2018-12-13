@@ -1,13 +1,12 @@
+LOL 5 TY1
+JK TY1
+BFF
+LMAO TY1 TY2 TY3
+OMG TY1 TY2 TY3
+TMI 4
+ILY TY1 TFTI TY2
+ILY TY1 ATM TY2
+ILY TY1 MYOB TY2
+BRB 5 TY1
+BRB TY1 IDK TY1
 LOML
-BRB 5 TY0 			//Array
-LOL 5 TY5 			//Size of the array
-LOL 0 TY6 			//Index 
-LOL 0 TY7 			//Number store
-LOL 1 TY8 			//Increment
-LMAO TY7 TY8 TY7	//Incrementing the number
-BRB TY6 IDK TY7		//Array at the index is going to equal to the number at TY7
-LMAO TY6 TY8 TY6	//Incrementing the index
-ILY TY7 TFTI TY5	//Checking if TY7 is less than size fo the array
-TMI 7				//Jump to line 6 if the statement is true
-BFF					//Halt
-
