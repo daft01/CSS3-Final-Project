@@ -10,6 +10,7 @@ using namespace std;
 
 int bin_to_dec(string bin);
 void clear(unordered_map<string, int> &reg_map);
+string regToBin(string reg);
 
 int main()
 {
@@ -35,6 +36,9 @@ int main()
         
         //numCode = bin_to_dec(opcode);
         //reg_map[numCode] = numCode;
+		if(opcode == "0000"){
+			;
+		}
         if(opcode == "1001"){
             clear(reg_map);
         }
@@ -127,18 +131,18 @@ int main()
                 arrStart = bin_to_dec(instruction.substr(12,4));
             }
             else{
-                string regisA = instruction.substr(4,4);
+                int regisA = reg_map[instruction.substr(4,4)];
                 string regisB = instruction.substr(8,4);
                 string regisC = instruction.substr(12,4);
                 
-                if(regisB == "1011"){
-                    reg_map[regisA] = reg_map[regisC];
+                if(regisB == "0100"){
+                    reg_map[regToBin(to_string(regisA+arrStart))] += reg_map[regisC];
                 }
-                else if(regisB == "0100"){
-                    reg_map[regisA] += reg_map[regisC];
+                else if(regisB == "0101"){
+                    reg_map[regToBin(to_string(regisA+arrStart))] -= reg_map[regisC];
                 }
-                else if(regisB == "0011"){
-                    reg_map[regisA] -= reg_map[regisC];
+                else if(regisB == "1011"){
+                    reg_map[regToBin(to_string(regisA+arrStart))] = reg_map[regisC];
                 }
             }
         }
@@ -176,6 +180,31 @@ int bin_to_dec(string bin)
     
     return num;
 }
+
+string regToBin(string reg)
+{
+    int num = 0;
+    string bin = "";
+    
+    for(int i=2; i<reg.size(); i++){
+        num *= 10;
+        num += reg[i] - '0';
+    }
+    
+    while(num / 2 != 0)
+    {
+        bin = to_string(num % 2) + bin;
+        num /= 2;
+    }
+    
+    bin = "1" + bin;
+    
+    while(bin.size() < 4)
+        bin = "0" + bin;
+    
+    return bin;
+}
+
 void clear(unordered_map<string, int> &reg_map){
     // a map from strings to keys to rep registers
     reg_map["0000"] = 0;                     //r1
