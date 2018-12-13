@@ -26,8 +26,6 @@ int main(){
         
         fin >> opcode;
 
-       	count++;
-		out << count << " "; 
         if(opcode == "LOL"){ // In
             out << "0001";
             fin >> num;
@@ -114,11 +112,11 @@ int main(){
                 fin >> regis;
                 
                 if(regis == "IDK")
-                    cout << "1011";
+                    out << "1011";
                 else if(regis == "LMAO")
-                    cout << "0100";
+                    out << "0100";
                 else if(regis == "SUB")
-                    cout << "0101";
+                    out << "0101";
                 
                 fin >> regis;
                 out << regToBin(regis);
@@ -167,7 +165,7 @@ string decToBin(int dec)
     if(dec == 0)
         return "00000000";
     
-    while(dec / 2 != 0)
+    while(dec)
     {
         bin = to_string(dec % 2) + bin;
         dec /= 2;
