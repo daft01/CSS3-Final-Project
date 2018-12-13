@@ -19,13 +19,15 @@ int main(){
     }
     
     string opcode;
-    int num;
+    int num, count=0;
     string regis;
     
     while(!fin.eof()){
         
         fin >> opcode;
-        
+
+       	count++;
+		out << count << " "; 
         if(opcode == "LOL"){ // In
             out << "0001";
             fin >> num;
@@ -99,15 +101,14 @@ int main(){
 			fin >> regis;
             
             if(isdigit(regis[0])){
-                if(regis[0] == 1)
+                if(regis.length() == 1)
                     out << decToBin(regis[0] - '0');
                 else
-                    out << decToBin((regis[0] - '0' * 10) + regis[1] - '0');
+                    out << decToBin((regis[0] - '0' * 10) + (regis[1] - '0'));
                 
                 fin >> regis;
                 out << regToBin(regis);
             }else{
-                fin >> regis;
                 out << regToBin(regis);
                 
                 fin >> regis;
@@ -122,6 +123,7 @@ int main(){
                 fin >> regis;
                 out << regToBin(regis);
             }
+            out << endl;
         }
 		else if(opcode == "LOML"){
             out << "1001000000000000" << endl;
